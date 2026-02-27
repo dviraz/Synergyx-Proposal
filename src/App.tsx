@@ -76,7 +76,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 relative overflow-hidden">
+      <section className="pt-32 md:pt-40 pb-16 md:pb-20 px-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-orange-100 to-red-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3 -z-10" />
         
         <div className="max-w-4xl mx-auto text-center">
@@ -97,7 +97,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-stone-900 leading-tight mb-6 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-stone-900 leading-tight mb-6 tracking-tight"
           >
             מזניקים את ביצועי האתר של <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">יוגה לב</span>
           </motion.h1>
@@ -289,7 +289,7 @@ export default function App() {
             subtitle="תהליך עבודה מובנה ושקוף, המבטיח שיפור ניכר ומדיד בביצועי האתר."
           />
 
-          <div className="space-y-8 relative before:absolute before:inset-0 before:ms-7 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-stone-200 before:to-transparent">
+          <div className="space-y-8 relative before:hidden md:before:block before:absolute before:inset-0 md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-stone-200 before:to-transparent">
             {[
               {
                 phase: 'שלב 1',
@@ -316,12 +316,12 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2 }}
-                className="relative flex flex-col md:flex-row items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active gap-6 md:gap-0"
+                className="relative flex flex-col md:flex-row items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active gap-4 md:gap-0"
               >
-                <div className="flex items-center justify-center w-14 h-14 rounded-full border-4 border-stone-50 bg-white shadow-lg text-orange-600 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                  <step.icon className="w-6 h-6" />
+                <div className="flex items-center justify-center w-16 h-16 md:w-14 md:h-14 rounded-full border-4 border-stone-50 bg-white shadow-lg text-orange-600 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 mb-2 md:mb-0">
+                  <step.icon className="w-7 h-7 md:w-6 md:h-6" />
                 </div>
-                <div className="w-full md:w-[calc(50%-3rem)] p-6 rounded-3xl bg-white border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-full md:w-[calc(50%-3rem)] p-6 md:p-8 rounded-3xl bg-white border border-stone-100 shadow-sm hover:shadow-md transition-shadow text-center md:text-right">
                   <div className="text-sm font-bold text-orange-600 mb-1">{step.phase}</div>
                   <h4 className="text-xl font-bold text-stone-900 mb-2">{step.title}</h4>
                   <p className="text-stone-600">{step.desc}</p>
@@ -345,7 +345,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-stone-900 rounded-3xl p-8 md:p-12 border border-stone-800 flex flex-col relative overflow-hidden shadow-2xl shadow-orange-900/20"
+              className="bg-stone-900 rounded-3xl p-6 sm:p-8 md:p-12 border border-stone-800 flex flex-col relative overflow-hidden shadow-2xl shadow-orange-900/20"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-red-600 to-orange-500 blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2" />
               
@@ -353,17 +353,17 @@ export default function App() {
                 הטבת חודש מרץ
               </div>
 
-              <div className="mb-8 relative z-10 text-center">
-                <h3 className="text-3xl font-bold text-white mb-3">אופטימיזציית מהירות מקיפה</h3>
-                <p className="text-stone-400 text-lg">פרויקט חד-פעמי להאצת האתר ושיפור חוויית המשתמש.</p>
+              <div className="mb-8 relative z-10 text-center mt-8 sm:mt-0">
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">אופטימיזציית מהירות מקיפה</h3>
+                <p className="text-stone-400 text-base sm:text-lg">פרויקט חד-פעמי להאצת האתר ושיפור חוויית המשתמש.</p>
               </div>
               
               <div className="mb-10 relative z-10 flex flex-col items-center">
-                <div className="text-stone-500 line-through text-2xl mb-1 font-medium">₪2,500</div>
+                <div className="text-stone-500 line-through text-xl sm:text-2xl mb-1 font-medium">₪2,500</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">₪1,500</span>
+                  <span className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">₪1,500</span>
                 </div>
-                <div className="text-sm text-stone-400 mt-3 bg-stone-800/50 px-4 py-1.5 rounded-full border border-stone-700">תשלום חד-פעמי | לא כולל מע"מ</div>
+                <div className="text-xs sm:text-sm text-stone-400 mt-3 bg-stone-800/50 px-4 py-1.5 rounded-full border border-stone-700">תשלום חד-פעמי | לא כולל מע"מ</div>
               </div>
 
               <ul className="space-y-4 mb-10 flex-1 relative z-10 max-w-md mx-auto w-full">
@@ -387,10 +387,10 @@ export default function App() {
                   יצירת קשר לתיאום
                 </a>
                 <a href="https://paypal.me/synergyx/1500" target="_blank" rel="noopener noreferrer" className="flex-1 py-4 rounded-2xl font-bold text-lg text-center bg-[#003087] text-white hover:bg-[#00205c] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
                     <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zM19.349 6.53c-.11-.53-.34-1.01-.68-1.42-.64-.78-1.74-1.15-3.21-1.15H8.01L5.89 17.3h3.28l.96-6.07c.08-.52.52-.9 1.05-.9h2.19c3.16 0 5.81-1.28 6.54-5.05.02-.1.04-.2.06-.31.02-.14.03-.29.04-.44z"/>
                   </svg>
-                  תשלום מאובטח ב-PayPal
+                  תשלום ב-PayPal
                 </a>
               </div>
             </motion.div>
@@ -423,6 +423,10 @@ export default function App() {
               <div className="mb-8 pb-8 border-b border-stone-100">
                 <div className="text-3xl font-black text-stone-900">₪3,500</div>
                 <div className="text-sm text-stone-500 mt-1">לחודש | לא כולל מע"מ</div>
+                <div className="mt-4 inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1.5 rounded-full border border-orange-100">
+                  <Zap className="w-3 h-3" />
+                  + ₪3,000 דמי הקמה (חודש ראשון)
+                </div>
               </div>
 
               <ul className="space-y-3 mb-8 flex-1">
@@ -459,6 +463,10 @@ export default function App() {
               <div className="mb-8 pb-8 border-b border-stone-100">
                 <div className="text-3xl font-black text-stone-900">₪2,800</div>
                 <div className="text-sm text-stone-500 mt-1">לחודש (דמי ניהול) | לא כולל מע"מ</div>
+                <div className="mt-4 inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1.5 rounded-full border border-orange-100">
+                  <Zap className="w-3 h-3" />
+                  + ₪2,000 דמי הקמה (הקמת קמפיינים)
+                </div>
               </div>
 
               <ul className="space-y-3 mb-8 flex-1">
@@ -494,6 +502,10 @@ export default function App() {
               <div className="mb-8 pb-8 border-b border-stone-100">
                 <div className="text-3xl font-black text-stone-900">₪4,500</div>
                 <div className="text-sm text-stone-500 mt-1">לחודש | לא כולל מע"מ</div>
+                <div className="mt-4 inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1.5 rounded-full border border-orange-100">
+                  <Zap className="w-3 h-3" />
+                  + ₪1,500 דמי הקמה (אסטרטגיה ושפה)
+                </div>
               </div>
 
               <ul className="space-y-3 mb-8 flex-1">

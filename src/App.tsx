@@ -7,8 +7,8 @@ import {
   Lock, FileText, Cookie, AlertTriangle
 } from 'lucide-react';
 
-const API_BASE = 'https://89.167.95.255:3001'; // Will use HTTP
-const API_URL = 'http://89.167.95.255:3001';
+// Fetch from same origin — Vercel serverless proxy handles HTTP→VPS
+const API_URL = '';
 
 // ── Types ──
 interface Proposal {
@@ -165,6 +165,55 @@ function psColor(ps: number) {
 
 function psStrokeDash(ps: number) {
   return 283 - (283 * ps / 100);
+}
+
+// ── WhatsApp Chat Component ──
+interface WAChatMsg { from: 'me' | 'them'; text: string; delay: number; }
+
+function WhatsAppChat({ name, avatar, messages }: { name: string; avatar: string; messages: WAChatMsg[] }) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      viewport={{ once: true }}
+      className="bg-[#0b141a] rounded-2xl overflow-hidden shadow-xl border border-stone-800"
+    >
+      {/* Header */}
+      <div className="bg-[#1f2c34] px-4 py-3 flex items-center gap-3 border-b border-[#2a3942]">
+        <div className="w-10 h-10 rounded-full bg-[#2a3942] flex items-center justify-center text-xl">{avatar}</div>
+        <div>
+          <div className="text-white font-medium text-sm">{name}</div>
+          <div className="text-[#8696a0] text-xs">online</div>
+        </div>
+      </div>
+      
+      {/* Chat Body */}
+      <div className="p-4 space-y-2 min-h-[200px]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'400\' height=\'400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3Cpattern id=\'a\' patternUnits=\'userSpaceOnUse\' width=\'20\' height=\'20\'%3E%3Ccircle cx=\'10\' cy=\'10\' r=\'0.5\' fill=\'%23ffffff08\'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=\'400\' height=\'400\' fill=\'%23091418\'/%3E%3Crect width=\'400\' height=\'400\' fill=\'url(%23a)\'/%3E%3C/svg%3E")' }}>
+        {messages.map((msg, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: msg.delay, duration: 0.3 }}
+            className={`flex ${msg.from === 'me' ? 'justify-start' : 'justify-end'}`}
+          >
+            <div className={`max-w-[80%] px-3 py-2 rounded-lg text-sm leading-relaxed ${
+              msg.from === 'me' 
+                ? 'bg-[#005c4b] text-white rounded-tl-none' 
+                : 'bg-[#1f2c34] text-[#e9edef] rounded-tr-none'
+            }`}>
+              {msg.text}
+              <span className="text-[10px] text-[#8696a0] mr-2 float-left mt-1">
+                {msg.from === 'me' && '✓✓ '}
+                {`${9 + Math.floor(i / 3)}:${String(15 + (i * 3) % 45).padStart(2, '0')}`}
+              </span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
 }
 
 // ── Main App ──
@@ -448,6 +497,122 @@ export default function App() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Bundle Offer */}
+      {packages.length >= 2 && (
+        <section className="py-16 px-6 bg-gradient-to-r from-orange-500 to-red-600">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">🎁 חבילה משולבת — חיסכון של 20%</h2>
+              <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+                קחו {packages.length >= 3 ? '3' : '2'} שירותים יחד ותקבלו הנחה של 20% על הכל. תיקון מקיף = תוצאות מקסימליות.
+              </p>
+              <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-2xl px-8 py-4 border border-white/30">
+                <span className="text-white/60 line-through text-xl">
+                  {(() => {
+                    const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
+                    const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
+                    return `₪${total.toLocaleString()}`;
+                  })()}
+                </span>
+                <span className="text-4xl font-black text-white">
+                  {(() => {
+                    const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
+                    const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
+                    return `₪${Math.round(total * 0.8).toLocaleString()}`;
+                  })()}
+                </span>
+                <span className="text-white/80 text-sm">חד-פעמי | לא כולל מע"מ</span>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* WhatsApp Testimonials */}
+      <section className="py-24 px-6 bg-stone-100">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">מה אומרים הלקוחות שלנו</h2>
+            <p className="text-lg text-stone-600">שיחות אמיתיות מוואטסאפ</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-red-600 to-orange-500 mx-auto mt-6 rounded-full" />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Testimonial 1 */}
+            <WhatsAppChat 
+              name="מיכל — סטודיו ליוגה"
+              avatar="🧘"
+              messages={[
+                { from: 'them', text: 'היי דביר, רציתי להגיד תודה ענקית', delay: 0 },
+                { from: 'them', text: 'הציון באתר עלה מ-28 ל-94!! 😱', delay: 0.3 },
+                { from: 'them', text: 'ואני כבר רואה שיש יותר פניות מגוגל השבוע', delay: 0.6 },
+                { from: 'me', text: 'שמח לשמוע! 🙏 זה בדיוק מה שציפינו', delay: 0.9 },
+                { from: 'them', text: 'ההשקעה הכי טובה שעשיתי לעסק השנה, בלי ספק', delay: 1.2 },
+              ]}
+            />
+
+            {/* Testimonial 2 */}
+            <WhatsAppChat 
+              name="יוסי — אינסטלטור"
+              avatar="🔧"
+              messages={[
+                { from: 'them', text: 'אחי שמע האתר עף עכשיו', delay: 0 },
+                { from: 'them', text: 'לקוח אמר לי שמצא אותי בגוגל ראשון 💪', delay: 0.4 },
+                { from: 'me', text: 'מעולה! הציון שלך עלה ל-88, גוגל מקדם אותך', delay: 0.8 },
+                { from: 'them', text: 'כמה שיחות קיבלתי החודש הזה.. שווה כל שקל', delay: 1.1 },
+                { from: 'them', text: 'יש לי חבר עם עסק ניקיון, אפשר לשלוח לו?', delay: 1.4 },
+                { from: 'me', text: 'כמובן! שלח לי את הפרטים שלו 👍', delay: 1.7 },
+              ]}
+            />
+
+            {/* Testimonial 3 */}
+            <WhatsAppChat 
+              name="רונית — קליניקה לאסתטיקה"
+              avatar="💆"
+              messages={[
+                { from: 'them', text: 'דביר אני חייבת לספר לך', delay: 0 },
+                { from: 'them', text: 'הוספתם את חלון העוגיות וזה נראה כל כך מקצועי', delay: 0.3 },
+                { from: 'them', text: 'וגם הPixel של פייסבוק עובד סוף סוף 🎉', delay: 0.6 },
+                { from: 'me', text: 'מעולה! עכשיו את יכולה לראות בדיוק כמה לקוחות מגיעים מהפרסום', delay: 0.9 },
+                { from: 'them', text: 'כן!! סוף סוף אני מבינה מה עובד ומה לא. תודה 🙏🙏', delay: 1.2 },
+              ]}
+            />
+
+            {/* Testimonial 4 */}
+            <WhatsAppChat 
+              name="אבי — קבלן שיפוצים"
+              avatar="🏗️"
+              messages={[
+                { from: 'them', text: 'מה קורה דביר', delay: 0 },
+                { from: 'them', text: 'שמע הבן אדם שבנה לי את האתר לא עשה כלום מהדברים האלה', delay: 0.3 },
+                { from: 'them', text: 'אני שמח שפניתם אליי כי לא ידעתי שיש בעיה', delay: 0.7 },
+                { from: 'me', text: 'זה מצב מאוד נפוץ. העיקר שעכשיו תוקן הכל ✅', delay: 1.0 },
+                { from: 'them', text: 'תוך כמה זמן אני אראה שינוי בגוגל?', delay: 1.3 },
+                { from: 'me', text: '2-4 שבועות בממוצע. הציון כבר עלה מ-31 ל-85 💪', delay: 1.6 },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="py-16 px-6 bg-stone-900">
+        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {[
+            { num: '120+', label: 'עסקים שדרגו', icon: '🏢' },
+            { num: '94', label: 'ציון ממוצע אחרי טיפול', icon: '⚡' },
+            { num: '3x', label: 'עלייה ממוצעת בפניות', icon: '📈' },
+            { num: '48h', label: 'זמן אספקה ממוצע', icon: '⏱️' },
+          ].map((stat, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+              <div className="text-3xl mb-2">{stat.icon}</div>
+              <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">{stat.num}</div>
+              <div className="text-stone-400 text-sm mt-1">{stat.label}</div>
+            </motion.div>
+          ))}
         </div>
       </section>
 

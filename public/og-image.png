@@ -1,0 +1,18 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c0a09"/>
+      <stop offset="100%" style="stop-color:#1c1917"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#dc2626"/>
+      <stop offset="100%" style="stop-color:#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="610" width="1200" height="20" fill="url(#accent)"/>
+  <text x="600" y="240" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="72" font-weight="bold">SYNERGYX</text>
+  <text x="600" y="320" text-anchor="middle" fill="#a8a29e" font-family="Arial, sans-serif" font-size="36">Digital Marketing</text>
+  <text x="600" y="420" text-anchor="middle" fill="#f97316" font-family="Arial, sans-serif" font-size="42" font-weight="bold">הצעה מותאמת אישית לעסק שלך</text>
+  <text x="600" y="480" text-anchor="middle" fill="#78716c" font-family="Arial, sans-serif" font-size="28">בדקנו את האתר שלך ומצאנו הזדמנויות לשיפור</text>
+</svg>

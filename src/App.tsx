@@ -15,8 +15,15 @@ import {
   ArrowLeft,
   ShieldCheck,
   Megaphone,
-  Instagram
+  Instagram,
+  Target
 } from 'lucide-react';
+
+const WhatsAppIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={`fill-current ${className}`}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
 
 const SynergyxLogo = () => (
   <div className="flex items-center gap-2">
@@ -69,8 +76,9 @@ export default function App() {
             <a href="#pricing" className="hover:text-orange-600 transition-colors">השקעה</a>
             <a href="#services" className="hover:text-orange-600 transition-colors">שירותים משלימים</a>
           </div>
-          <a href="#contact" className="bg-gradient-to-r from-red-600 to-orange-500 text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:shadow-orange-500/30 transition-all transform hover:-translate-y-0.5">
-            יצירת קשר
+          <a href="https://wa.me/972528816696?text=היי%20דביר,%20אשמח%20לדבר%20איתך%20על%20ההצעה%20ליוגה%20לב" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#20bd5a] hover:shadow-lg hover:shadow-[#25D366]/30 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+            <WhatsAppIcon className="w-5 h-5" />
+            <span className="hidden sm:inline">וואטסאפ</span>
           </a>
         </div>
       </header>
@@ -195,7 +203,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-3 mb-8">
                   <div className="flex justify-between text-sm">
                     <span className="text-stone-500">זמן תגובה ראשוני (TTFB)</span>
                     <span className="font-bold text-red-500">2.4s (איטי)</span>
@@ -209,6 +217,16 @@ export default function App() {
                     <span className="font-bold text-orange-500">0.15 (סביר)</span>
                   </div>
                 </div>
+
+                <a 
+                  href="https://pagespeed.web.dev/analysis/https-yogalev-co-il/667v70p880?form_factor=mobile" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full py-3 rounded-xl border border-stone-200 text-stone-600 font-bold text-sm hover:bg-stone-50 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Search className="w-4 h-4" />
+                  לצפייה בדו"ח המלא של גוגל
+                </a>
               </div>
             </motion.div>
           </div>
@@ -366,7 +384,7 @@ export default function App() {
                 <div className="text-xs sm:text-sm text-stone-400 mt-3 bg-stone-800/50 px-4 py-1.5 rounded-full border border-stone-700">תשלום חד-פעמי | לא כולל מע"מ</div>
               </div>
 
-              <ul className="space-y-4 mb-10 flex-1 relative z-10 max-w-md mx-auto w-full">
+              <ul className="space-y-1 mb-10 flex-1 relative z-10 max-w-md mx-auto w-full">
                 {[
                   'גיבוי מלא של האתר טרם תחילת העבודה',
                   'הטמעת מערכת Caching מתקדמת',
@@ -375,7 +393,7 @@ export default function App() {
                   'דחיית טעינת סקריפטים חיצוניים',
                   'דוח ביצועים מפורט (לפני ואחרי)'
                 ].map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-stone-300">
+                  <li key={i} className={`flex items-start gap-3 text-stone-300 p-3 rounded-xl transition-colors hover:bg-white/10 ${i % 2 === 0 ? 'bg-white/5' : ''}`}>
                     <CheckCircle2 className="w-6 h-6 text-orange-500 shrink-0" />
                     <span className="text-lg">{feature}</span>
                   </li>
@@ -383,10 +401,11 @@ export default function App() {
               </ul>
 
               <div className="flex flex-col sm:flex-row gap-4 relative z-10">
-                <a href="#contact" className="flex-1 py-4 rounded-2xl font-bold text-lg text-center bg-gradient-to-r from-red-600 to-orange-500 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all transform hover:-translate-y-1">
-                  יצירת קשר לתיאום
+                <a href="https://wa.me/972528816696?text=היי%20דביר,%20אני%20רוצה%20להתקדם%20עם%20האצת%20האתר" target="_blank" rel="noopener noreferrer" className="flex-1 py-4 rounded-2xl font-bold text-lg text-center bg-[#25D366] text-white hover:bg-[#20bd5a] hover:shadow-lg hover:shadow-[#25D366]/25 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                  <WhatsAppIcon className="w-6 h-6" />
+                  שליחת הודעה לתיאום
                 </a>
-                <a href="https://paypal.me/synergyx/1500" target="_blank" rel="noopener noreferrer" className="flex-1 py-4 rounded-2xl font-bold text-lg text-center bg-[#003087] text-white hover:bg-[#00205c] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=dvirazz@gmail.com&item_name=Website%20Speed%20Optimization&amount=1500&currency_code=ILS" target="_blank" rel="noopener noreferrer" className="flex-1 py-4 rounded-2xl font-bold text-lg text-center bg-[#003087] text-white hover:bg-[#00205c] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
                     <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zM19.349 6.53c-.11-.53-.34-1.01-.68-1.42-.64-.78-1.74-1.15-3.21-1.15H8.01L5.89 17.3h3.28l.96-6.07c.08-.52.52-.9 1.05-.9h2.19c3.16 0 5.81-1.28 6.54-5.05.02-.1.04-.2.06-.31.02-.14.03-.29.04-.44z"/>
                   </svg>
@@ -406,7 +425,7 @@ export default function App() {
             subtitle="מעבר לשיפור מהירות האתר, אנו מציעים חבילות ליווי חודשיות להגדלת נפח הפניות והנרשמים לסטודיו."
           />
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* SEO Package */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -429,7 +448,7 @@ export default function App() {
                 </div>
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-1 mb-8 flex-1">
                 {[
                   'מחקר מילות מפתח מעמיק',
                   'אופטימיזציית מבנה ותוכן (On-Page)',
@@ -437,7 +456,7 @@ export default function App() {
                   'אופטימיזציה טכנית שוטפת',
                   'דוח התקדמות חודשי מפורט'
                 ].map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-stone-700 text-sm">
+                  <li key={i} className={`flex items-start gap-3 text-stone-700 text-sm p-2.5 rounded-xl transition-colors hover:bg-orange-50 ${i % 2 === 0 ? 'bg-stone-50' : ''}`}>
                     <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
@@ -469,7 +488,7 @@ export default function App() {
                 </div>
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-1 mb-8 flex-1">
                 {[
                   'הקמה וניהול קמפיינים בגוגל',
                   'ניהול קמפיינים בפייסבוק ואינסטגרם',
@@ -477,7 +496,7 @@ export default function App() {
                   'אופטימיזציה שוטפת להוזלת עלויות ליד',
                   'לא כולל תקציב מדיה (תשלום לפלטפורמות)'
                 ].map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-stone-700 text-sm">
+                  <li key={i} className={`flex items-start gap-3 text-stone-700 text-sm p-2.5 rounded-xl transition-colors hover:bg-orange-50 ${i % 2 === 0 ? 'bg-stone-50' : ''}`}>
                     <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
@@ -508,7 +527,7 @@ export default function App() {
                 </div>
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-1 mb-8 flex-1">
                 {[
                   'יצירת גאנט תוכן חודשי מותאם אישית',
                   'עיצוב ופרסום של 3 פוסטים/רילס בשבוע',
@@ -516,7 +535,43 @@ export default function App() {
                   'עיצוב והעלאת סטוריז שוטפים',
                   'ניהול תגובות והודעות (מענה ראשוני)'
                 ].map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-stone-700 text-sm">
+                  <li key={i} className={`flex items-start gap-3 text-stone-700 text-sm p-2.5 rounded-xl transition-colors hover:bg-orange-50 ${i % 2 === 0 ? 'bg-stone-50' : ''}`}>
+                    <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0 mt-0.5" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Analytics & Tracking Package */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-white rounded-3xl p-8 border border-stone-200 flex flex-col hover:shadow-xl transition-shadow"
+            >
+              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-6 text-orange-600">
+                <Target className="w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-stone-900 mb-2">אנליטיקס והמרות</h3>
+              <p className="text-stone-600 mb-6 min-h-[48px]">הטמעה מדויקת של קודי מעקב למדידת המרות, אירועי משתמש והחזר השקעה (ROI).</p>
+              
+              <div className="mb-8 pb-8 border-b border-stone-100">
+                <div className="text-3xl font-black text-stone-900">₪1,200</div>
+                <div className="text-sm text-stone-500 mt-1">תשלום חד-פעמי | לא כולל מע"מ</div>
+              </div>
+
+              <ul className="space-y-1 mb-8 flex-1">
+                {[
+                  'הקמה והגדרת Google Analytics 4',
+                  'הטמעת Facebook Pixel ו-Conversions API',
+                  'הגדרת המרות (Conversions) ואירועי רכישה',
+                  'מעקב אחרי טפסים, שיחות והקלקות',
+                  'ניהול תגיות דרך Google Tag Manager',
+                  'בדיקת תקינות נתונים (QA)'
+                ].map((feature, i) => (
+                  <li key={i} className={`flex items-start gap-3 text-stone-700 text-sm p-2.5 rounded-xl transition-colors hover:bg-orange-50 ${i % 2 === 0 ? 'bg-stone-50' : ''}`}>
                     <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
@@ -535,18 +590,18 @@ export default function App() {
             נשמח לקבוע פגישת היכרות קצרה (בזום או פרונטלית) כדי לעבור על ההצעה, לענות על שאלות ולהתחיל לעבוד יחד.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-            <a href="mailto:dvir@synergyx.pro" className="flex items-center gap-3 text-stone-300 hover:text-white transition-colors">
-              <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center border border-stone-800">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-6 mb-16">
+            <a href="https://wa.me/972528816696?text=היי%20דביר,%20אשמח%20לדבר%20איתך%20על%20ההצעה%20ליוגה%20לב" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-stone-300 hover:text-[#25D366] transition-colors group">
+              <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center border border-stone-800 group-hover:border-[#25D366] transition-colors">
+                <WhatsAppIcon className="w-5 h-5" />
+              </div>
+              <span className="font-medium text-lg" dir="ltr">052-8816696</span>
+            </a>
+            <a href="mailto:dvir@synergyx.pro" className="flex items-center gap-3 text-stone-300 hover:text-white transition-colors group">
+              <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center border border-stone-800 group-hover:border-white transition-colors">
                 <Mail className="w-5 h-5" />
               </div>
               <span className="font-medium text-lg">dvir@synergyx.pro</span>
-            </a>
-            <a href="tel:0528816696" className="flex items-center gap-3 text-stone-300 hover:text-white transition-colors">
-              <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center border border-stone-800">
-                <Phone className="w-5 h-5" />
-              </div>
-              <span className="font-medium text-lg" dir="ltr">052-8816696</span>
             </a>
           </div>
 

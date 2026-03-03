@@ -474,13 +474,13 @@ export default function App() {
       </section>
 
       {/* Bundle Offer */}
-      {packages.length >= 2 && (
+      {(() => { const ot = packages.filter((p: any) => !p.priceNote.includes('חודש')); return ot.length >= 2 ? ot : null; })() && (
         <section className="py-16 px-6 bg-gradient-to-r from-orange-500 to-red-600">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">🎁 חבילה משולבת — חיסכון של 20%</h2>
               <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-                קחו {packages.length >= 3 ? '3' : '2'} שירותים יחד ותקבלו הנחה של 20% על הכל. תיקון מקיף = תוצאות מקסימליות.
+                קחו את כל השירותים החד-פעמיים יחד ותקבלו הנחה של 20%. תיקון מקיף = תוצאות מקסימליות.
               </p>
               <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-2xl px-8 py-4 border border-white/30">
                 <span className="text-white/60 line-through text-xl">

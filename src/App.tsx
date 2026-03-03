@@ -475,44 +475,70 @@ export default function App() {
 
       {/* Bundle Offer */}
       {(() => { const ot = packages.filter((p: any) => !p.priceNote.includes('חודש')); return ot.length >= 2 ? ot : null; })() && (
-        <section className="py-16 px-6 bg-gradient-to-r from-orange-500 to-red-600">
-          <div className="max-w-4xl mx-auto text-center">
+        <section className="py-20 px-6 bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full blur-3xl" />
+          </div>
+          <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">🎁 חבילה משולבת — חיסכון של 20%</h2>
-              <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-                קחו את כל השירותים החד-פעמיים יחד ותקבלו הנחה של 20%. תיקון מקיף = תוצאות מקסימליות.
-              </p>
-              <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-2xl px-8 py-4 border border-white/30">
-                <span className="text-white/60 line-through text-xl">
-                  {(() => {
-                    const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
-                    const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
-                    return `₪${total.toLocaleString()}`;
-                  })()}
-                </span>
-                <span className="text-4xl font-black text-white">
-                  {(() => {
-                    const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
-                    const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
-                    return `₪${Math.round(total * 0.8).toLocaleString()}`;
-                  })()}
-                </span>
-                <span className="text-white/80 text-sm">חד-פעמי | לא כולל מע"מ</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/20 text-orange-400 font-medium text-sm mb-6 border border-orange-500/30">
+                <Zap className="w-4 h-4" /> הבחירה של רוב הלקוחות שלנו
               </div>
-              <a
-                href={(() => {
-                  const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
-                  const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
-                  const discounted = Math.round(total * 0.8);
-                  return `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=dvirazz%40gmail.com&amount=${discounted}&currency_code=ILS&item_name=${encodeURIComponent('Synergyx - חבילה משולבת - ' + (d?.businessName || ''))}&no_shipping=1&return=${encodeURIComponent(window.location.href)}`;
-                })()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 px-8 py-4 bg-white text-stone-900 rounded-full font-bold text-lg hover:bg-stone-100 transition-all"
-              >
-                <CreditCard className="w-5 h-5" />
-                שלם עכשיו — חבילה מלאה
-              </a>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">תיקון מקיף = תוצאות מקסימליות</h2>
+              <p className="text-stone-400 text-lg mb-4 max-w-2xl mx-auto">
+                לקוחות שלקחו את כל השירותים יחד ראו <strong className="text-white">פי 3 יותר פניות</strong> לעומת תיקון חלקי — כי גוגל מתגמל אתרים שמתוקנים ב-100%.
+              </p>
+
+              {/* What's included */}
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                {packages.filter((p: any) => !p.priceNote.includes('חודש')).map((pkg: any, i: number) => (
+                  <div key={i} className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-white text-sm border border-white/10">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    {pkg.title}
+                  </div>
+                ))}
+              </div>
+
+              {/* Pricing */}
+              <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-3xl p-8 max-w-lg mx-auto shadow-2xl shadow-orange-900/30">
+                <div className="flex items-center justify-center gap-4 mb-3">
+                  <span className="text-white/50 line-through text-2xl">
+                    {(() => {
+                      const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
+                      const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
+                      return `₪${total.toLocaleString()}`;
+                    })()}
+                  </span>
+                  <span className="text-5xl font-black text-white">
+                    {(() => {
+                      const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
+                      const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
+                      return `₪${Math.round(total * 0.8).toLocaleString()}`;
+                    })()}
+                  </span>
+                </div>
+                <div className="text-white/70 text-sm mb-1">חד-פעמי | לא כולל מע"מ</div>
+                <div className="inline-flex items-center gap-1 bg-white/20 rounded-full px-4 py-1.5 text-white font-bold text-sm mb-6">
+                  💰 חיסכון של ₪{(() => {
+                    const oneTime = packages.filter((p: any) => !p.priceNote.includes('חודש'));
+                    const total = oneTime.reduce((sum: number, p: any) => sum + parseInt(p.price.replace(/[^\d]/g, '')), 0);
+                    return Math.round(total * 0.2).toLocaleString();
+                  })()}
+                </div>
+                <div>
+                  <a
+                    href={`https://wa.me/972528816696?text=${encodeURIComponent(`היי, אני מעוניין/ת בחבילה המשולבת עבור ${d?.businessName || 'העסק שלי'}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-stone-900 rounded-full font-bold text-lg hover:bg-stone-100 transition-all"
+                  >
+                    <Rocket className="w-5 h-5" />
+                    רוצה להתחיל — דברו איתי
+                  </a>
+                </div>
+              </div>
+
+              <p className="text-stone-500 text-sm mt-6">* ההצעה תקפה ל-14 יום מרגע קבלתה</p>
             </motion.div>
           </div>
         </section>

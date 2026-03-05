@@ -175,6 +175,20 @@ const TESTIMONIALS = [
   { src: '/testimonial-4.png', label: 'אבי — קבלן שיפוצים' },
 ];
 
+// ── Helpers ──
+function cleanBusinessName(name: string): string {
+  // Strip emojis and special symbols
+  let clean = name.replace(/[\u2700-\u27BF\u{1F300}-\u{1F9FF}\u{2600}-\u{2B55}\u{FE00}-\u{FEFF}\u200D\u20E3\u{E0020}-\u{E007F}✅❌⭐⚡⚖️]/gu, '').trim();
+  // If it looks like an SEO title (too long or has ? at end), try to extract the real name
+  if (clean.length > 40 || clean.includes('?') || clean.includes('|')) {
+    // Take first meaningful segment before separators
+    const parts = clean.split(/[|:?\-–—]/).map(s => s.trim()).filter(s => s.length > 0);
+    if (parts.length > 0 && parts[0].length <= 40) clean = parts[0];
+    else if (parts.length > 0) clean = parts[0].slice(0, 40);
+  }
+  return clean || name;
+}
+
 // ── Main App ──
 export default function App() {
   const [data, setData] = useState<Proposal | null>(null);
@@ -215,7 +229,8 @@ export default function App() {
     </div>
   );
 
-  const d = data;
+  const d = { ...data, businessName: cleanBusinessName(data.businessName) };
+  if (d.competitor) d.competitor = { ...d.competitor, name: cleanBusinessName(d.competitor.name) };
   const waText = encodeURIComponent(`היי, קיבלתי את ההצעה עבור ${d.businessName}. אשמח לדבר.`);
   const packages = d.services.map(s => ALL_PACKAGES[s]).filter(Boolean);
 
